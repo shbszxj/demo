@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autofac.Integration.WCF.Con
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autofac.Integration.WCF.Client", "Autofac.Integration.WCF.Client\Autofac.Integration.WCF.Client.csproj", "{8FD1FE3E-9735-46A1-8CDA-50FFCF19EC30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autofac.Integration.Owin.Console", "Autofac.Integration.Owin.Console\Autofac.Integration.Owin.Console.csproj", "{4C79AA77-03E4-483F-96EE-A2E6F9C91299}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autofac.Integration.Owin.SelfHost.Console", "Autofac.Integration.Owin.Console\Autofac.Integration.Owin.SelfHost.Console.csproj", "{4C79AA77-03E4-483F-96EE-A2E6F9C91299}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

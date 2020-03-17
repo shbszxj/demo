@@ -4,9 +4,9 @@ using Microsoft.Owin;
 using Owin;
 using Autofac;
 
-[assembly: OwinStartup(typeof(Autofac.Integration.Owin.Console.Startup))]
+[assembly: OwinStartup(typeof(Autofac.Integration.Owin.SelfHost.Console.Startup))]
 
-namespace Autofac.Integration.Owin.Console
+namespace Autofac.Integration.Owin.SelfHost.Console
 {
     public class Startup
     {

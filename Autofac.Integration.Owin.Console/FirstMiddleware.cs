@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Owin;
 
-namespace Autofac.Integration.Owin.Console
+namespace Autofac.Integration.Owin.SelfHost.Console
 {
     public class FirstMiddleware : OwinMiddleware
     {

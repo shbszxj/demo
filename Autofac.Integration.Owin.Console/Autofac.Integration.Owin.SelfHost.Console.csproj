@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{4C79AA77-03E4-483F-96EE-A2E6F9C91299}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Autofac.Integration.Owin.Console</RootNamespace>
-    <AssemblyName>Autofac.Integration.Owin.Console</AssemblyName>
+    <RootNamespace>Autofac.Integration.Owin.SelfHost.Console</RootNamespace>
+    <AssemblyName>Autofac.Integration.Owin.SelfHost.Console</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

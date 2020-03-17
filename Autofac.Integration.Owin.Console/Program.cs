@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Autofac.Integration.Owin.Console
+namespace Autofac.Integration.Owin.SelfHost.Console
 {
     class Program
     {
