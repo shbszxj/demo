@@ -14,7 +14,7 @@ namespace Autofac.Integration.WCF.Console
         static void Main(string[] args)
         {
             var builder = new ContainerBuilder();
-            builder.RegisterType<TestService>().As<ITestService>();
+            builder.RegisterType<TestService>().As<ITestService>().SingleInstance();
 
             using (var container = builder.Build())
             {
