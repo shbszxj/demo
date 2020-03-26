@@ -20,13 +20,13 @@ namespace Autofac.Integration.WebApi.Owin.SelfHost.Console
             using (WebApp.Start<Startup>(BaseAddress))
             {
                 System.Console.WriteLine("=======================================");
-                //GetBooks();
+                GetBooks();
 
                 System.Console.WriteLine("=======================================");
-                //GetBook(Guid.Empty.ToString());
+                GetBook(Guid.Empty.ToString());
 
                 System.Console.WriteLine("=======================================");
-                //CreateBook("Test book 2");
+                CreateBook("Test book 2");
 
                 System.Console.WriteLine("=======================================");
                 UpdateBook("77777777");
@@ -39,14 +39,9 @@ namespace Autofac.Integration.WebApi.Owin.SelfHost.Console
         {
             string api = "api/books";
 
-            System.Console.WriteLine($"[GET] {api} :");
-
             using (var httpClient = new HttpClient())
             {
-                var response = httpClient.GetAsync($"{BaseAddress}/{api}");
-
-                System.Console.WriteLine(response.Result);
-                System.Console.WriteLine(response.Result.Content.ReadAsStringAsync().Result);
+                var response = httpClient.GetAsync($"{BaseAddress}/{api}").Result;
             }
         }
 
@@ -54,13 +49,9 @@ namespace Autofac.Integration.WebApi.Owin.SelfHost.Console
         {
             string api = $"api/books/{id}";
 
-            System.Console.WriteLine($"[GET] {api} :");
-
             using (var httpClient = new HttpClient())
             {
-                var response = httpClient.GetAsync($"{BaseAddress}/{api}");
-
-                System.Console.WriteLine(response.Result);
+                var response = httpClient.GetAsync($"{BaseAddress}/{api}").Result;
             }
         }
 
@@ -68,40 +59,32 @@ namespace Autofac.Integration.WebApi.Owin.SelfHost.Console
         {
             string api = $"api/books";
 
-            System.Console.WriteLine($"[POST] {api} :");
-
             using (var httpClient = new HttpClient())
             {
                 var response = httpClient.PostAsJsonAsync($"{BaseAddress}/{api}", new BookInfo
                 {
                     Name = name
-                });
-
-                System.Console.WriteLine(response.Result);
-                System.Console.WriteLine(response.Result.Content.ReadAsStringAsync().Result);
+                }).Result;
             }
         }
 
         private static void UpdateBook(string name)
         {
-            string api = $"{BaseAddress}/api/books";
-
-            System.Console.WriteLine($"[PUT] {api} :");
+            string api = $"api/books";
 
             using (var httpClient = new HttpClient())
             {
-                var bookCreated = httpClient.PostAsJsonAsync(api, new BookInfo
+                var bookCreated = httpClient.PostAsJsonAsync($"{BaseAddress}/{api}", new BookInfo
                 {
                     Name = "6666"
-                }).Result.Content.ReadAsAsync<BookDetailDto>().Result;
+                }).Result.Content.ReadAsAsync<BookInfoDto>();
 
-                var response = httpClient.PutAsJsonAsync($"{api}/{bookCreated.Id}", new BookInfo
+                var client = new HttpClient();
+                var response = client.PutAsJsonAsync($"{BaseAddress}/{api}/{bookCreated.Result.Id}", new BookInfo
                 {
                     Name = name
                 });
-
-                System.Console.WriteLine(response);
-                System.Console.WriteLine(response.Result.Content.ReadAsStringAsync().Result);
+                System.Console.WriteLine(response.Result);
             }
         }
     }

@@ -1,42 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Web.Http;
-using System.Web.Http.Description;
-using Autofac.Integration.WebApi.Owin.SelfHost.Console.Books.Domain;
+﻿using Autofac.Integration.WebApi.Owin.SelfHost.Console.Books.Domain;
 using Autofac.Integration.WebApi.Owin.SelfHost.Console.Books.DTOs;
 using Autofac.Integration.WebApi.Owin.SelfHost.Console.Books.Models;
+using Autofac.Integration.WebApi.Owin.SelfHost.Console.Infrastructure;
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace Autofac.Integration.WebApi.Owin.SelfHost.Console.Books
 {
     [RoutePrefix("api/books")]
     public class BooksController : ApiController
     {
-        private ICollection<Book> _books;
-        
+        private readonly ILogger _logger;
 
-        public BooksController()
+        private SimpleMemoryCache<Book> _cache;
+
+        private readonly IRepository<Book> _repository;
+
+        public BooksController(ILogger logger, SimpleMemoryCache<Book> cache, IRepository<Book> repository)
         {
-            _books = new List<Book>()
-            {
-                new Book()
-                {
-                    Id = Guid.Empty.ToString(),
-                    Name = "Book 1",
-                    Author = "Jack",
-                    Description = "A test book"
-                },
-                new Book()
-                {
-                    Id = Guid.NewGuid().ToString(),
-                    Name = "Book 2",
-                    Author = "Jack",
-                    Description = "A test book too"
-                }
-            };
+            _logger = logger;
+            _cache = cache;
+            _repository = repository;
         }
 
         [HttpGet]
@@ -44,7 +31,7 @@ namespace Autofac.Integration.WebApi.Owin.SelfHost.Console.Books
         [ResponseType(typeof(IEnumerable<BookInfoDto>))]
         public IHttpActionResult Get()
         {
-            return Ok(_books);
+            return Ok(_repository.All());
         }
 
         [HttpGet]
@@ -52,7 +39,7 @@ namespace Autofac.Integration.WebApi.Owin.SelfHost.Console.Books
         [ResponseType(typeof(BookDetailDto))]
         public IHttpActionResult GetBook(string id)
         {
-            return Ok(_books.FirstOrDefault(b => b.Id == id));
+            return Ok(_repository.Fetch(id));
         }
 
         [HttpPost]
@@ -61,13 +48,12 @@ namespace Autofac.Integration.WebApi.Owin.SelfHost.Console.Books
         public IHttpActionResult CreateBook([FromBody]BookInfo book)
         {
             var id = Guid.NewGuid().ToString();
-            _books.Add(new Book
+            _repository.Create(new Book
             {
                 Id = id,
                 Name = book.Name
             });
 
-            System.Console.WriteLine($"Thread {Thread.CurrentThread.ManagedThreadId}");
             return GetBook(id);
         }
 
@@ -77,11 +63,14 @@ namespace Autofac.Integration.WebApi.Owin.SelfHost.Console.Books
         {
             System.Console.WriteLine($"Thread {Thread.CurrentThread.ManagedThreadId}");
 
-            var item = _books.FirstOrDefault(b => b.Id == id);
+            var item = _repository.Fetch(id);
             if (item == null)
                 return NotFound();
 
             item.Name = book.Name;
+
+            _repository.Update(item);
+
             return GetBook(id);
         }
     }
