@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autofac.Integration.WebApi.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF6.Integration.Console", "EF6.Integration.Console\EF6.Integration.Console.csproj", "{7E9D94E2-7C34-4A63-A449-EEFACC0AB0CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF6.Sqlite.Integration.Console", "EF6.Sqlite.Integration.Console\EF6.Sqlite.Integration.Console.csproj", "{BE812FD5-5568-48B2-98AD-5614C90B8E1D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{7E9D94E2-7C34-4A63-A449-EEFACC0AB0CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E9D94E2-7C34-4A63-A449-EEFACC0AB0CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E9D94E2-7C34-4A63-A449-EEFACC0AB0CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE812FD5-5568-48B2-98AD-5614C90B8E1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE812FD5-5568-48B2-98AD-5614C90B8E1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE812FD5-5568-48B2-98AD-5614C90B8E1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE812FD5-5568-48B2-98AD-5614C90B8E1D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
