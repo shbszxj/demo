@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autofac.Integration.Owin.Se
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autofac.Integration.WebApi.Owin.SelfHost.Console", "Autofac.Integration.WebApi.Owin.SelfHost.Console\Autofac.Integration.WebApi.Owin.SelfHost.Console.csproj", "{42922198-6CC9-49CC-AD05-84D603F2E188}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF6.Integration.Console", "EF6.Integration.Console\EF6.Integration.Console.csproj", "{7E9D94E2-7C34-4A63-A449-EEFACC0AB0CA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{42922198-6CC9-49CC-AD05-84D603F2E188}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42922198-6CC9-49CC-AD05-84D603F2E188}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42922198-6CC9-49CC-AD05-84D603F2E188}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E9D94E2-7C34-4A63-A449-EEFACC0AB0CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E9D94E2-7C34-4A63-A449-EEFACC0AB0CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E9D94E2-7C34-4A63-A449-EEFACC0AB0CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E9D94E2-7C34-4A63-A449-EEFACC0AB0CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
