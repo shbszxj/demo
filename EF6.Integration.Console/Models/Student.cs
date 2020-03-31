@@ -21,6 +21,8 @@ namespace EF6.Integration.Console.Models
 
         public virtual Grade Grade { get; set; }
 
+        public int Age { get; set; }
+
         public virtual StudentAddress Address { get; set; }
 
         public virtual ICollection<Course> Courses { get; set; }

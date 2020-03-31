@@ -9,6 +9,8 @@ namespace EF6.Integration.Console
         public SchoolContext() : base("SchoolContext")
         {
             Database.SetInitializer<SchoolContext>(new SchoolDbInitializer());
+
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<SchoolContext, Migrations.Configuration>());
         }
 
         public DbSet<Student> Students { get; set; }
