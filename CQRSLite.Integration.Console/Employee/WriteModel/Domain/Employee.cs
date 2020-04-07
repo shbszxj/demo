@@ -20,6 +20,11 @@ namespace CQRSLite.Integration.Console.Employee.WriteModel.Domain
 
         public Address Address { get; set; }
 
+        public Employee()
+        {
+
+        }
+
         public Employee(string name, int age, Gender gender, Address address)
         {
             Id = Guid.NewGuid();
