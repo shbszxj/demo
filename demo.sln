@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CQRSLite.Integration.Consol
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Regex.Console", "Regex.Console\Regex.Console.csproj", "{0DD29554-F574-4956-B5FC-9905BA144401}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TDD.Test", "TDD.Test\TDD.Test.csproj", "{D39C04CE-D918-48CB-B02A-CB1A096508CA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{0DD29554-F574-4956-B5FC-9905BA144401}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DD29554-F574-4956-B5FC-9905BA144401}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DD29554-F574-4956-B5FC-9905BA144401}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D39C04CE-D918-48CB-B02A-CB1A096508CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D39C04CE-D918-48CB-B02A-CB1A096508CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D39C04CE-D918-48CB-B02A-CB1A096508CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D39C04CE-D918-48CB-B02A-CB1A096508CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
