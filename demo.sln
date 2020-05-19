@@ -23,6 +23,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Regex.Console", "Regex.Cons
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TDD.Test", "TDD.Test\TDD.Test.csproj", "{D39C04CE-D918-48CB-B02A-CB1A096508CA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CQRS", "CQRS", "{493B611F-95C6-4D2F-8AF8-6BC0FE19B4DF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CQRS.Example", "CQRS\CQRS.Example\CQRS.Example.csproj", "{88D800CA-2CAD-441C-BB50-6253C8DEBFA4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,9 +73,16 @@ Global
 		{D39C04CE-D918-48CB-B02A-CB1A096508CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D39C04CE-D918-48CB-B02A-CB1A096508CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D39C04CE-D918-48CB-B02A-CB1A096508CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88D800CA-2CAD-441C-BB50-6253C8DEBFA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88D800CA-2CAD-441C-BB50-6253C8DEBFA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88D800CA-2CAD-441C-BB50-6253C8DEBFA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88D800CA-2CAD-441C-BB50-6253C8DEBFA4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{88D800CA-2CAD-441C-BB50-6253C8DEBFA4} = {493B611F-95C6-4D2F-8AF8-6BC0FE19B4DF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {52CE5D99-9510-4211-92CC-B8ABD5EE0B0C}
