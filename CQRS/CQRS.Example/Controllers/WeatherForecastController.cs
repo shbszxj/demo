@@ -23,6 +23,16 @@ namespace CQRS.Example.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Get Weather Forecasts
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     GET /WeatherForecast
+        ///
+        /// </remarks>
+        /// <returns></returns>
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
