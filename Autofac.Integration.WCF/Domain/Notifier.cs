@@ -20,7 +20,8 @@ namespace Autofac.Integration.WCF.Service.Domain
 
         public Task TestFunction()
         {
-            _notification.TestCallbackMethod();
+            _notification.Callback("Send", $"{DateTime.Now} a new message from server");
+            _notification.Callback("SendAnotherMessage", $"{DateTime.Now} another message from server");
             return _eventPublisher.Publish(new NotifierEvent());
             //return Task.CompletedTask;
         }

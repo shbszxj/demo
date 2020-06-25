@@ -29,11 +29,13 @@ namespace Autofac.Integration.WCF.Service
             });
         }
 
-        public Task Send(string message)
+        public Task Send(string methodName, object[] args)
         {
             return ExecuteCallbackFunction(() =>
             {
-                _callback.Send(message);
+                var type = _callback.GetType();
+                var method = type.GetMethod(methodName);
+                method?.Invoke(_callback, args);
             });
         }
 

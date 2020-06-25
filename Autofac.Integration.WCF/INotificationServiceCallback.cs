@@ -10,6 +10,9 @@ namespace Autofac.Integration.WCF.Service
         void Send(string message);
 
         [OperationContract(IsOneWay = true)]
+        void SendAnotherMessage(string message);
+
+        [OperationContract(IsOneWay = true)]
         [ServiceKnownType("GetKnownTypes", typeof(ServiceKnownTypesProvider))]
         void Handle(ApplicationEvent applicationEvent);
     }

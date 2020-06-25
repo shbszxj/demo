@@ -118,12 +118,6 @@ namespace Autofac.Integration.WCF.Client.NotificationService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="NotificationService.INotificationService", CallbackContract=typeof(Autofac.Integration.WCF.Client.NotificationService.INotificationServiceCallback))]
     public interface INotificationService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INotificationService/TestCallbackMethod", ReplyAction="http://tempuri.org/INotificationService/TestCallbackMethodResponse")]
-        void TestCallbackMethod();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INotificationService/TestCallbackMethod", ReplyAction="http://tempuri.org/INotificationService/TestCallbackMethodResponse")]
-        System.Threading.Tasks.Task TestCallbackMethodAsync();
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INotificationService/Subscribe", ReplyAction="http://tempuri.org/INotificationService/SubscribeResponse")]
         void Subscribe(string client);
         
@@ -148,6 +142,9 @@ namespace Autofac.Integration.WCF.Client.NotificationService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/INotificationService/Send")]
         void Send(string message);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/INotificationService/SendAnotherMessage")]
+        void SendAnotherMessage(string message);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/INotificationService/Handle")]
         void Handle(Autofac.Integration.WCF.Client.NotificationService.ApplicationEvent applicationEvent);
@@ -179,14 +176,6 @@ namespace Autofac.Integration.WCF.Client.NotificationService {
         
         public NotificationServiceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(callbackInstance, binding, remoteAddress) {
-        }
-        
-        public void TestCallbackMethod() {
-            base.Channel.TestCallbackMethod();
-        }
-        
-        public System.Threading.Tasks.Task TestCallbackMethodAsync() {
-            return base.Channel.TestCallbackMethodAsync();
         }
         
         public void Subscribe(string client) {

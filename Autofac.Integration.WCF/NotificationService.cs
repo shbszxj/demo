@@ -4,6 +4,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.ServiceModel;
 using System.Text;
 using System.Threading;
@@ -61,13 +62,11 @@ namespace Autofac.Integration.WCF.Service
             return Task.CompletedTask;
         }
 
-        public void TestCallbackMethod()
+        public void Callback(string methodName, params object[] args)
         {
             foreach (var client in _subscribers.Values)
             {
-                var message = $"Thread {Thread.CurrentThread.ManagedThreadId} This is a callback method, HashCode = {GetHashCode()}";
-                Console.WriteLine(message);
-                client.Send(message);
+                client.Send(methodName, args);
             }
         }
     }

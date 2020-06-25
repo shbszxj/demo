@@ -17,7 +17,12 @@ namespace Autofac.Integration.WCF.Client
 
         public void Send(string message)
         {
-            Console.WriteLine($"Receive message {message}, HashCode = {GetHashCode()}");
+            Console.WriteLine($"Receive {message}, HashCode = {GetHashCode()}");
+        }
+
+        public void SendAnotherMessage(string message)
+        {
+            Console.WriteLine($"Receive {message}, HashCode = {GetHashCode()}");
         }
     }
 }
