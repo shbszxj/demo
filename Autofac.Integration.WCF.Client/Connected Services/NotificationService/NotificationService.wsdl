@@ -17,6 +17,9 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:1010/NotificationService?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:1010/NotificationService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:1010/NotificationService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Autofac.Integration.WCF.Service.Domain" />
+      <xsd:import schemaLocation="http://localhost:1010/NotificationService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Autofac.Integration.WCF.Service.Events" />
+      <xsd:import schemaLocation="http://localhost:1010/NotificationService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="INotificationService_TestCallbackMethod_InputMessage">
@@ -25,16 +28,52 @@
   <wsdl:message name="INotificationService_TestCallbackMethod_OutputMessage">
     <wsdl:part name="parameters" element="tns:TestCallbackMethodResponse" />
   </wsdl:message>
+  <wsdl:message name="INotificationService_Subscribe_InputMessage">
+    <wsdl:part name="parameters" element="tns:Subscribe" />
+  </wsdl:message>
+  <wsdl:message name="INotificationService_Subscribe_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubscribeResponse" />
+  </wsdl:message>
+  <wsdl:message name="INotificationService_KeepAlive_InputMessage">
+    <wsdl:part name="parameters" element="tns:KeepAlive" />
+  </wsdl:message>
+  <wsdl:message name="INotificationService_KeepAlive_OutputMessage">
+    <wsdl:part name="parameters" element="tns:KeepAliveResponse" />
+  </wsdl:message>
+  <wsdl:message name="INotificationService_Unsubscribe_InputMessage">
+    <wsdl:part name="parameters" element="tns:Unsubscribe" />
+  </wsdl:message>
+  <wsdl:message name="INotificationService_Unsubscribe_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UnsubscribeResponse" />
+  </wsdl:message>
   <wsdl:message name="INotificationService_Send_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:Send" />
+  </wsdl:message>
+  <wsdl:message name="INotificationService_Handle_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:Handle" />
   </wsdl:message>
   <wsdl:portType name="INotificationService">
     <wsdl:operation name="TestCallbackMethod">
       <wsdl:input wsaw:Action="http://tempuri.org/INotificationService/TestCallbackMethod" message="tns:INotificationService_TestCallbackMethod_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/INotificationService/TestCallbackMethodResponse" message="tns:INotificationService_TestCallbackMethod_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="Subscribe">
+      <wsdl:input wsaw:Action="http://tempuri.org/INotificationService/Subscribe" message="tns:INotificationService_Subscribe_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INotificationService/SubscribeResponse" message="tns:INotificationService_Subscribe_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="KeepAlive">
+      <wsdl:input wsaw:Action="http://tempuri.org/INotificationService/KeepAlive" message="tns:INotificationService_KeepAlive_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INotificationService/KeepAliveResponse" message="tns:INotificationService_KeepAlive_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Unsubscribe">
+      <wsdl:input wsaw:Action="http://tempuri.org/INotificationService/Unsubscribe" message="tns:INotificationService_Unsubscribe_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INotificationService/UnsubscribeResponse" message="tns:INotificationService_Unsubscribe_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="Send">
       <wsdl:output wsaw:Action="http://tempuri.org/INotificationService/Send" message="tns:INotificationService_Send_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Handle">
+      <wsdl:output wsaw:Action="http://tempuri.org/INotificationService/Handle" message="tns:INotificationService_Handle_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSDualHttpBinding_INotificationService" type="tns:INotificationService">
@@ -49,8 +88,41 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="Subscribe">
+      <soap12:operation soapAction="http://tempuri.org/INotificationService/Subscribe" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KeepAlive">
+      <soap12:operation soapAction="http://tempuri.org/INotificationService/KeepAlive" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Unsubscribe">
+      <soap12:operation soapAction="http://tempuri.org/INotificationService/Unsubscribe" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="Send">
       <soap12:operation soapAction="http://tempuri.org/INotificationService/Send" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Handle">
+      <soap12:operation soapAction="http://tempuri.org/INotificationService/Handle" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

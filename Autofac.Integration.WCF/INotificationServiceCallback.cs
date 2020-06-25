@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Autofac.Integration.WCF.Service.Events;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Autofac.Integration.WCF.Service
 {
@@ -12,5 +8,9 @@ namespace Autofac.Integration.WCF.Service
     {
         [OperationContract(IsOneWay = true)]
         void Send(string message);
+
+        [OperationContract(IsOneWay = true)]
+        [ServiceKnownType("GetKnownTypes", typeof(ServiceKnownTypesProvider))]
+        void Handle(ApplicationEvent applicationEvent);
     }
 }

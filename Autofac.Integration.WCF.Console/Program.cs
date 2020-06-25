@@ -1,7 +1,14 @@
 ﻿using Autofac.Integration.Wcf;
 using Autofac.Integration.WCF.Service;
+using Autofac.Integration.WCF.Service.Domain;
+using Autofac.Integration.WCF.Service.Events;
+using CQRSlite.Commands;
+using CQRSlite.Events;
+using CQRSlite.Routing;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.ServiceModel;
 using System.ServiceModel.Description;
 
@@ -16,11 +23,26 @@ namespace Autofac.Integration.WCF.Console
         static void Main(string[] args)
         {
             var builder = new ContainerBuilder();
+
+            builder.RegisterType<CustomMessageBus>().SingleInstance();
+            builder.Register(c => c.Resolve<CustomMessageBus>()).As<ICommandSender>();
+            builder.Register(c => c.Resolve<CustomMessageBus>()).As<IEventPublisher>();
+            builder.Register(c => c.Resolve<CustomMessageBus>()).As<IHandlerRegistrar>();
+
+            builder.RegisterType<Notifier>().SingleInstance();
+
             builder.RegisterType<TestService>().As<ITestService>().SingleInstance();
-            builder.RegisterType<NotificationService>().As<INotificationService>();
+            builder.RegisterType<NotificationService>().SingleInstance();
 
             using (var container = builder.Build())
             {
+                var bus = new RouteRegistrar(new DependencyResolver(container));
+
+                var types = typeof(CustomMessageBus).Assembly.GetExportedTypes()
+                    .Where(type => type.GetInterfaces().Contains(typeof(IHandlerRegistrar)));
+
+                bus.RegisterInAssemblyOf(types.ToArray());
+
                 HostService<ITestService>(container, "TestService");
 
                 HostNotificationService(container, "NotificationService");
@@ -38,8 +60,10 @@ namespace Autofac.Integration.WCF.Console
 
         private static void HostNotificationService(IContainer container, string name)
         {
+            ServiceKnownTypesProvider.KnownTypesAssemblies = new List<Assembly>() { typeof(CustomMessageBus).Assembly };
+
             var url = $"{BaseAddress}/{name}";
-            ServiceHost host = new ServiceHost(typeof(NotificationService), new Uri(url));
+            ServiceHost host = new ServiceHost(container.Resolve<NotificationService>(), new Uri(url));
 
             host.AddServiceEndpoint(typeof(INotificationService), new WSDualHttpBinding(WSDualHttpSecurityMode.None), string.Empty);
 

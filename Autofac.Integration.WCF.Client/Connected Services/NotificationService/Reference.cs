@@ -9,7 +9,110 @@
 //------------------------------------------------------------------------------
 
 namespace Autofac.Integration.WCF.Client.NotificationService {
+    using System.Runtime.Serialization;
+    using System;
     
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ApplicationEvent", Namespace="http://schemas.datacontract.org/2004/07/Autofac.Integration.WCF.Service.Events")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Autofac.Integration.WCF.Client.NotificationService.NotifierEvent))]
+    public partial class ApplicationEvent : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTimeOffset TimeStampField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int VersionField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTimeOffset TimeStamp {
+            get {
+                return this.TimeStampField;
+            }
+            set {
+                if ((this.TimeStampField.Equals(value) != true)) {
+                    this.TimeStampField = value;
+                    this.RaisePropertyChanged("TimeStamp");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Version {
+            get {
+                return this.VersionField;
+            }
+            set {
+                if ((this.VersionField.Equals(value) != true)) {
+                    this.VersionField = value;
+                    this.RaisePropertyChanged("Version");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="NotifierEvent", Namespace="http://schemas.datacontract.org/2004/07/Autofac.Integration.WCF.Service.Domain")]
+    [System.SerializableAttribute()]
+    public partial class NotifierEvent : Autofac.Integration.WCF.Client.NotificationService.ApplicationEvent {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="NotificationService.INotificationService", CallbackContract=typeof(Autofac.Integration.WCF.Client.NotificationService.INotificationServiceCallback))]
@@ -20,6 +123,24 @@ namespace Autofac.Integration.WCF.Client.NotificationService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INotificationService/TestCallbackMethod", ReplyAction="http://tempuri.org/INotificationService/TestCallbackMethodResponse")]
         System.Threading.Tasks.Task TestCallbackMethodAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INotificationService/Subscribe", ReplyAction="http://tempuri.org/INotificationService/SubscribeResponse")]
+        void Subscribe(string client);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INotificationService/Subscribe", ReplyAction="http://tempuri.org/INotificationService/SubscribeResponse")]
+        System.Threading.Tasks.Task SubscribeAsync(string client);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INotificationService/KeepAlive", ReplyAction="http://tempuri.org/INotificationService/KeepAliveResponse")]
+        void KeepAlive();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INotificationService/KeepAlive", ReplyAction="http://tempuri.org/INotificationService/KeepAliveResponse")]
+        System.Threading.Tasks.Task KeepAliveAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INotificationService/Unsubscribe", ReplyAction="http://tempuri.org/INotificationService/UnsubscribeResponse")]
+        void Unsubscribe(string client);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INotificationService/Unsubscribe", ReplyAction="http://tempuri.org/INotificationService/UnsubscribeResponse")]
+        System.Threading.Tasks.Task UnsubscribeAsync(string client);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -27,6 +148,9 @@ namespace Autofac.Integration.WCF.Client.NotificationService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/INotificationService/Send")]
         void Send(string message);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/INotificationService/Handle")]
+        void Handle(Autofac.Integration.WCF.Client.NotificationService.ApplicationEvent applicationEvent);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -63,6 +187,30 @@ namespace Autofac.Integration.WCF.Client.NotificationService {
         
         public System.Threading.Tasks.Task TestCallbackMethodAsync() {
             return base.Channel.TestCallbackMethodAsync();
+        }
+        
+        public void Subscribe(string client) {
+            base.Channel.Subscribe(client);
+        }
+        
+        public System.Threading.Tasks.Task SubscribeAsync(string client) {
+            return base.Channel.SubscribeAsync(client);
+        }
+        
+        public void KeepAlive() {
+            base.Channel.KeepAlive();
+        }
+        
+        public System.Threading.Tasks.Task KeepAliveAsync() {
+            return base.Channel.KeepAliveAsync();
+        }
+        
+        public void Unsubscribe(string client) {
+            base.Channel.Unsubscribe(client);
+        }
+        
+        public System.Threading.Tasks.Task UnsubscribeAsync(string client) {
+            return base.Channel.UnsubscribeAsync(client);
         }
     }
 }

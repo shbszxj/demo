@@ -65,9 +65,13 @@ namespace Autofac.Integration.WCF.Client
             using (var scope = container.BeginLifetimeScope())
             {
                 var messageWriter = scope.Resolve<MessageWriter>();
+                messageWriter.Subscribe();
+
                 messageWriter.TestMethod();
-                messageWriter.TestNotificationMethod();
-                messageWriter.TestNotificationMethod();
+                //messageWriter.TestNotificationMethod();
+                //messageWriter.TestNotificationMethod();
+
+                messageWriter.Unsubscribe();
             }
         }
     }

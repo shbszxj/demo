@@ -12,5 +12,14 @@ namespace Autofac.Integration.WCF.Service
     {
         [OperationContract]
         void TestCallbackMethod();
+
+        [OperationContract]
+        void Subscribe(string client);
+
+        [OperationContract]
+        void KeepAlive();
+
+        [OperationContract]
+        void Unsubscribe(string client);
     }
 }

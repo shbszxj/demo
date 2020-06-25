@@ -13,11 +13,23 @@ namespace Autofac.Integration.WCF.Client
     {
         private readonly ITestService _testService;
         private readonly INotificationService _notificationService;
+        private readonly Guid _id;
 
         public MessageWriter(ITestService testService, INotificationService notificationService)
         {
+            _id = Guid.NewGuid();
             _testService = testService;
             _notificationService = notificationService;
+        }
+
+        public void Subscribe()
+        {
+            _notificationService.Subscribe(_id.ToString());
+        }
+
+        public void Unsubscribe()
+        {
+            _notificationService.Unsubscribe(_id.ToString());
         }
 
         public void TestMethod()
