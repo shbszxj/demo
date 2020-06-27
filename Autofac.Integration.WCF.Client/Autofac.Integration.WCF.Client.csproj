@@ -82,20 +82,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Connected Services\NotificationService\NotificationService.wsdl" />
-    <None Include="Connected Services\NotificationService\NotificationService.xsd">
+    <None Include="Connected Services\NotificationService\Autofac.Integration.WCF.Service.Domain.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\NotificationService\NotificationService1.xsd">
+    <None Include="Connected Services\NotificationService\Autofac.Integration.WCF.Service.Events.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\NotificationService\NotificationService2.xsd">
+    <None Include="Connected Services\NotificationService\service.wsdl" />
+    <None Include="Connected Services\NotificationService\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\NotificationService\NotificationService21.xsd">
+    <None Include="Connected Services\NotificationService\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\NotificationService\NotificationService3.xsd">
+    <None Include="Connected Services\NotificationService\System.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\TestService\TestService.wsdl" />
@@ -125,9 +125,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\NotificationService\NotificationService.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\NotificationService\configuration91.svcinfo" />

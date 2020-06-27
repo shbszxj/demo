@@ -11,12 +11,14 @@ using System.Linq;
 using System.Reflection;
 using System.ServiceModel;
 using System.ServiceModel.Description;
+using System.ServiceModel.Discovery;
 
 namespace Autofac.Integration.WCF.Console
 {
     class Program
     {
-        private const string BaseAddress = "http://localhost:1010";
+        private const string HttpAddress = "http://localhost:1010";
+        private const string NetTcpAddress = "net.tcp://localhost:1011";
 
         private static readonly ICollection<ServiceHost> Hosts = new List<ServiceHost>();
 
@@ -45,7 +47,9 @@ namespace Autofac.Integration.WCF.Console
 
                 HostService<ITestService>(container, "TestService");
 
-                HostNotificationService(container, "NotificationService");
+                //HostNotificationService(container, "NotificationService");
+
+                HostNotificationServiceViaNetTcp(container, "NotificationService");
 
                 System.Console.WriteLine("Press <Enter> to stop the service.");
                 System.Console.ReadLine();
@@ -58,11 +62,39 @@ namespace Autofac.Integration.WCF.Console
             }
         }
 
+        private static void HostNotificationServiceViaNetTcp(IContainer container, string name)
+        {
+            ServiceKnownTypesProvider.KnownTypesAssemblies = new List<Assembly>() { typeof(CustomMessageBus).Assembly };
+
+            var url = $"{NetTcpAddress}/{name}";
+            ServiceHost host = new ServiceHost(container.Resolve<NotificationService>(), new Uri(url));
+
+            host.AddServiceEndpoint(typeof(INotificationService), new NetTcpBinding(SecurityMode.None, true)
+            {
+                SendTimeout = TimeSpan.FromSeconds(5)
+            }, "");
+
+            //Behaviors (metadata/errorhandling/discovery)
+            var serviceBehavior = new ServiceMetadataBehavior { HttpGetEnabled = false };
+            host.Description.Behaviors.Add(serviceBehavior);
+            host.Description.Behaviors.Add(new ServiceDiscoveryBehavior());
+
+            //Endpoints (metadata/discovery)
+            host.AddServiceEndpoint(typeof(IMetadataExchange), MetadataExchangeBindings.CreateMexTcpBinding(), "mex");
+            host.AddServiceEndpoint(new UdpDiscoveryEndpoint());
+
+            host.Open();
+
+            System.Console.WriteLine($"The {name} is ready at {url}");
+
+            Hosts.Add(host);
+        }
+
         private static void HostNotificationService(IContainer container, string name)
         {
             ServiceKnownTypesProvider.KnownTypesAssemblies = new List<Assembly>() { typeof(CustomMessageBus).Assembly };
 
-            var url = $"{BaseAddress}/{name}";
+            var url = $"{HttpAddress}/{name}";
             ServiceHost host = new ServiceHost(container.Resolve<NotificationService>(), new Uri(url));
 
             host.AddServiceEndpoint(typeof(INotificationService), new WSDualHttpBinding(WSDualHttpSecurityMode.None), string.Empty);
@@ -79,7 +111,7 @@ namespace Autofac.Integration.WCF.Console
         private static void HostService<TInterface>(IContainer container, string name)
         {
             var instance = container.Resolve<TInterface>();
-            var url = $"{BaseAddress}/{name}";
+            var url = $"{HttpAddress}/{name}";
             ServiceHost host = new ServiceHost(instance.GetType(), new Uri(url));
 
             host.AddServiceEndpoint(typeof(TInterface), new BasicHttpBinding(), string.Empty);

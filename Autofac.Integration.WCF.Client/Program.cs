@@ -32,14 +32,14 @@ namespace Autofac.Integration.WCF.Client
             builder
                 .Register(c => new DuplexChannelFactory<INotificationService>(
                     new InstanceContext(c.Resolve<INotificationServiceCallback>()),
-                    new WSDualHttpBinding(WSDualHttpSecurityMode.None)
+                    new NetTcpBinding(SecurityMode.None, true)
                     {
                         OpenTimeout = TimeSpan.FromMinutes(1),
                         SendTimeout = TimeSpan.FromMinutes(1),
                         CloseTimeout = TimeSpan.FromMinutes(1),
                         ReceiveTimeout = TimeSpan.FromMinutes(1)
                     },
-                    new EndpointAddress("http://localhost:1010/NotificationService")))
+                    new EndpointAddress("net.tcp://localhost:1011/NotificationService")))
                 .SingleInstance();
 
             builder
