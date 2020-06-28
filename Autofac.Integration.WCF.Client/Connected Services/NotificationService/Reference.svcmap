@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="358642f2-72c2-468e-af6d-08ecbe6b641c" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="5917c8d7-50f7-4d98-b940-245d8423ddf4" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,13 +19,15 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:1010/NotificationService" Protocol="http" SourceId="1" />
+    <MetadataSource Address="net.tcp://localhost:1011/NotificationService/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="NotificationService.xsd" MetadataType="Schema" ID="c5e40c38-6a88-4205-8593-b3c3f438b86f" SourceId="1" SourceUrl="http://localhost:1010/NotificationService?xsd=xsd1" />
-    <MetadataFile FileName="NotificationService.wsdl" MetadataType="Wsdl" ID="37406207-a0ba-49ab-a698-b5e9994be21b" SourceId="1" SourceUrl="http://localhost:1010/NotificationService?wsdl" />
-    <MetadataFile FileName="NotificationService.disco" MetadataType="Disco" ID="a784d2ec-a8ad-49ab-bad2-23b0b069003b" SourceId="1" SourceUrl="http://localhost:1010/NotificationService?disco" />
-    <MetadataFile FileName="NotificationService1.xsd" MetadataType="Schema" ID="3d2f00cb-bfcd-4dc2-9799-2c8458a053f6" SourceId="1" SourceUrl="http://localhost:1010/NotificationService?xsd=xsd0" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="32bc1ba3-48e2-4b3c-9cdb-1c4b1e186358" SourceId="1" SourceUrl="net.tcp://localhost:1011/NotificationService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="b20b915c-a870-426b-a40c-99c85c0eaa75" SourceId="1" SourceUrl="net.tcp://localhost:1011/NotificationService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="6a8ed1de-ef48-4851-8d32-5fd9060e59bc" SourceId="1" SourceUrl="net.tcp://localhost:1011/NotificationService/mex" />
+    <MetadataFile FileName="Autofac.Integration.WCF.Service.Domain.xsd" MetadataType="Schema" ID="c4bfec1f-1287-40e3-8f5a-6779a4ea8237" SourceId="1" SourceUrl="net.tcp://localhost:1011/NotificationService/mex" />
+    <MetadataFile FileName="Autofac.Integration.WCF.Service.Events.xsd" MetadataType="Schema" ID="0fd1c550-7aca-4fd8-950c-91beb131d88d" SourceId="1" SourceUrl="net.tcp://localhost:1011/NotificationService/mex" />
+    <MetadataFile FileName="System.xsd" MetadataType="Schema" ID="2c085bf0-ad90-49a9-a042-c8c5dc0ed7cc" SourceId="1" SourceUrl="net.tcp://localhost:1011/NotificationService/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

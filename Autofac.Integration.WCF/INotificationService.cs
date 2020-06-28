@@ -11,6 +11,12 @@ namespace Autofac.Integration.WCF.Service
     public interface INotificationService
     {
         [OperationContract]
-        void TestCallbackMethod();
+        void Subscribe(string client);
+
+        [OperationContract]
+        void KeepAlive();
+
+        [OperationContract]
+        void Unsubscribe(string client);
     }
 }
