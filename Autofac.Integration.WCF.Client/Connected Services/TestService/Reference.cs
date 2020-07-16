@@ -20,6 +20,12 @@ namespace Autofac.Integration.WCF.Client.TestService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITestService/TestMethod", ReplyAction="http://tempuri.org/ITestService/TestMethodResponse")]
         System.Threading.Tasks.Task TestMethodAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITestService/GetCalulation", ReplyAction="http://tempuri.org/ITestService/GetCalulationResponse")]
+        int GetCalulation(int a, int b);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITestService/GetCalulation", ReplyAction="http://tempuri.org/ITestService/GetCalulationResponse")]
+        System.Threading.Tasks.Task<int> GetCalulationAsync(int a, int b);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -55,6 +61,14 @@ namespace Autofac.Integration.WCF.Client.TestService {
         
         public System.Threading.Tasks.Task TestMethodAsync() {
             return base.Channel.TestMethodAsync();
+        }
+        
+        public int GetCalulation(int a, int b) {
+            return base.Channel.GetCalulation(a, b);
+        }
+        
+        public System.Threading.Tasks.Task<int> GetCalulationAsync(int a, int b) {
+            return base.Channel.GetCalulationAsync(a, b);
         }
     }
 }

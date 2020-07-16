@@ -15,8 +15,15 @@ namespace Autofac.Integration.WCF.Service
             _notifier = notifier;
         }
 
+        public int GetCalulation(int a, int b)
+        {
+            Thread.Sleep(1000);
+            return a + b;
+        }
+
         public void TestMethod()
         {
+            Thread.Sleep(1000);
             Console.WriteLine($"Thread {Thread.CurrentThread.ManagedThreadId} This is a test method, Hashcode = {GetHashCode()}");
             _notifier.TestFunction();
         }

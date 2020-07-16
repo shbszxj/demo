@@ -7,5 +7,8 @@ namespace Autofac.Integration.WCF.Service
     {
         [OperationContract]
         void TestMethod();
+
+        [OperationContract]
+        int GetCalulation(int a, int b);
     }
 }

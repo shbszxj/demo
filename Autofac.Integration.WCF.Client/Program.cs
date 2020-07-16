@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ServiceModel;
-using System.ServiceModel.Description;
-using System.Text;
-using System.Threading.Tasks;
-using Autofac.Integration.Wcf;
+﻿using Autofac.Integration.Wcf;
 using Autofac.Integration.WCF.Client.NotificationService;
 using Autofac.Integration.WCF.Client.TestService;
+using System;
+using System.ServiceModel;
+using System.Threading.Tasks;
 
 namespace Autofac.Integration.WCF.Client
 {
@@ -57,22 +53,46 @@ namespace Autofac.Integration.WCF.Client
 
             Test(container);
 
-            Console.ReadLine();
+            System.Console.ReadLine();
         }
 
         private static void Test(IContainer container)
         {
-            using (var scope = container.BeginLifetimeScope())
+            //using (var scope = container.BeginLifetimeScope())
+            //{
+            //    var messageWriter = scope.Resolve<MessageWriter>();
+            //    messageWriter.Subscribe();
+
+            //    messageWriter.TestMethod();
+            //    messageWriter.Unsubscribe();
+            //}
+            Service<ITestService>.Use(async (service) =>
             {
-                var messageWriter = scope.Resolve<MessageWriter>();
-                messageWriter.Subscribe();
+                Console.WriteLine($"{DateTime.Now.ToLongTimeString()} start1:");
+                await service.TestMethodAsync();
+                Console.WriteLine($"{DateTime.Now.ToLongTimeString()} end1");
+            });
 
-                messageWriter.TestMethod();
-                //messageWriter.TestNotificationMethod();
-                //messageWriter.TestNotificationMethod();
+            Service<ITestService>.Use(async (service) =>
+            {
+                Console.WriteLine($"{DateTime.Now.ToLongTimeString()} start2:");
+                var result = await service.GetCalulationAsync(2, 3);
+                Console.WriteLine($"{DateTime.Now.ToLongTimeString()} result = {result}");
+            });
 
-                messageWriter.Unsubscribe();
-            }
+            Task.Run(async () =>
+            {
+                var result = await GetCaculation(1, 2);
+                Console.WriteLine($"{DateTime.Now.ToLongTimeString()} result = {result}");
+            });
+        }
+
+        public static async Task<int> GetCaculation(int a, int b)
+        {
+            return await Service<ITestService>.Use(async (service) =>
+            {
+                return await service.GetCalulationAsync(a, b);
+            });
         }
     }
 }
