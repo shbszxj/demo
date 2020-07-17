@@ -14,39 +14,64 @@ namespace Autofac.Integration.WCF.Client
         public static TReturn Use<TReturn>(Func<TChannel, TReturn> codeBlock)
         {
             IClientChannel proxy = (IClientChannel)_channelFactory.CreateChannel();
-            bool success = false;
             try
             {
-                TReturn result = codeBlock((TChannel)proxy);
-                proxy.Close();
-                success = true;
-                return result;
+                return codeBlock((TChannel)proxy);
             }
             finally
             {
-                if (!success)
-                {
+                if (proxy.State == CommunicationState.Faulted)
                     proxy.Abort();
-                }
+                else
+                    proxy.Close();
             }
         }
 
         public static void Use(Action<TChannel> codeBlock)
         {
             IClientChannel proxy = (IClientChannel)_channelFactory.CreateChannel();
-            bool success = false;
             try
             {
                 codeBlock((TChannel)proxy);
-                proxy.Close();
-                success = true;
             }
             finally
             {
-                if (!success)
-                {
+                if (proxy.State == CommunicationState.Faulted)
                     proxy.Abort();
-                }
+                else
+                    proxy.Close();
+            }
+        }
+
+        public async static Task UseAsync(Func<TChannel, Task> codeBlock)
+        {
+            var proxy = (IClientChannel)_channelFactory.CreateChannel();
+            try
+            {
+                await codeBlock.Invoke((TChannel)proxy);
+            }
+            finally
+            {
+                if (proxy.State == CommunicationState.Faulted)
+                    proxy.Abort();
+                else
+                    proxy.Close();
+            }
+        }
+
+        public async static Task<TReturn> UseAsync<TReturn>(Func<TChannel, Task<TReturn>> codeBlock)
+        {
+            var proxy = (IClientChannel)_channelFactory.CreateChannel();
+            try
+            {
+                return await codeBlock.Invoke((TChannel)proxy);
+            }
+            finally
+            {
+                if (proxy.State == CommunicationState.Faulted)
+                    proxy.Abort();
+                else
+                    proxy.Close();
             }
         }
     }
