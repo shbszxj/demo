@@ -1,0 +1,27 @@
+﻿<Window x:Class="WpfEnumToCheckbox.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfEnumToCheckbox"
+        mc:Ignorable="d"
+        Title="MainWindow"
+        Height="450"
+        Width="800"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <Window.Resources>
+        <local:DeptConverter x:Key="DeptConverter" />
+    </Window.Resources>
+    <Grid>
+        <StackPanel x:Name="DepartmentsPanel">
+            <CheckBox Content="A"
+                      IsChecked="{Binding Path=Department, Converter={StaticResource DeptConverter}, ConverterParameter={x:Static local:Department.A}}" />
+            <CheckBox Content="B"
+                      IsChecked="{Binding Path=Department, Converter={StaticResource DeptConverter}, ConverterParameter={x:Static local:Department.B}}" />
+            <CheckBox Content="C"
+                      IsChecked="{Binding Path=Department, Converter={StaticResource DeptConverter}, ConverterParameter={x:Static local:Department.C}}" />
+            <CheckBox Content="D"
+                      IsChecked="{Binding Path=Department, Converter={StaticResource DeptConverter}, ConverterParameter={x:Static local:Department.D}}" />
+        </StackPanel>
+    </Grid>
+</Window>
