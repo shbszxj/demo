@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CQRSLite.Integration.Console")]
+[assembly: AssemblyTitle("Domain.Delegate")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("CQRSLite.Integration.Console")]
+[assembly: AssemblyProduct("Domain.Delegate")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("14fcbcf1-a093-4062-9b8c-c50fb0ca6388")]
+[assembly: Guid("dbcc0c50-5789-4306-9f53-dbba3830a030")]
 
 // Version information for an assembly consists of the following four values:
 //

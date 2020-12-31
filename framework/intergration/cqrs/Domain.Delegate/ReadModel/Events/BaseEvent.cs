@@ -1,17 +1,19 @@
 ﻿using CQRSlite.Events;
 using System;
 
-namespace CQRSLite.Integration.Console.Employee.ReadModel.Events
+namespace Domain.Delegate.ReadModel.Events
 {
-    public class EmployeeCreated : IEvent
+    public class BaseEvent : IEvent
     {
         public Guid Id { get; set; }
+
         public int Version { get; set; }
+
         public DateTimeOffset TimeStamp { get; set; }
 
-        public EmployeeCreated(Guid id)
+        public BaseEvent()
         {
-            Id = id;
+            TimeStamp = DateTimeOffset.UtcNow;
         }
     }
 }
